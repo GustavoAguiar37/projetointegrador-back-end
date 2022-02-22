@@ -1,27 +1,21 @@
 import Categoria from "../models/categoria"
+import database from "./database"
 
 
 
 const repositoryCategorias = {
 
-    lerTodas: () => {
+    lerTodas: (callback: (categorias: Categoria[]) => void  ) => {
 
-        const categorias: Categoria [] = [
+        const sql = 'SELECT * FROM categorias'
 
-            {
-                id:1,
-                nome:'Bares',
-            },
+        const allcallback = (err: Error | null, rows: Categoria[]) => {
+            callback(rows)
+        }
 
-            {
-                id:2,
-                nome:'Restaurantes',
-            },
-
-        ]
-
-        return categorias
-
+        database.all(sql, (err, rows) => {
+        
+        }) 
     },
 
 
