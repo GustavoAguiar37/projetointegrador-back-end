@@ -18,15 +18,11 @@ const routerCategorias = express.Router()
 
 routerCategorias.get('/categorias/:id', (req, res) => {
 
-    const id: number = +req .params.id
-    const categoria: Categoria = repositoryCategorias.ler(1)
-
-    res.json(categoria)
-
-
-
+    const id: number = +req.params.id
+    const callback = (categoria: Categoria) => {
+        res.json(categoria)
+    }
+        repositoryCategorias.ler(id, callback)
 })
-
-
 
 export default routerCategorias

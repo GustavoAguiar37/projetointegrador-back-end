@@ -2,7 +2,6 @@ import Categoria from "../models/categoria"
 import database from "./database"
 
 
-
 const repositoryCategorias = {
 
     lerTodas: (callback: (categorias: Categoria[]) => void  ) => {
@@ -13,26 +12,22 @@ const repositoryCategorias = {
             callback(rows)
         }
 
-        database.all(sql, (err, rows) => {
-        
-        }) 
+        database.all(sql,allcallback) 
     },
 
 
+    ler:(id: number, callback: (categoria: Categoria) => void) =>  {
 
-    ler: (id: number) => {
+        const sql = `SELECT * FROM categorias where id = ${id}`
 
-        const categoria: Categoria = {
-
-            id:1,
-            nome:'Bares',
+        const callbackGet = (err: Error | null, categoria: Categoria) => {
+            callback(categoria)
         }
-        return categoria
+
+        database.get(sql, callbackGet)
 
     }
 
 }
-
-
 
 export default repositoryCategorias
